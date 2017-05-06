@@ -1,5 +1,5 @@
 Name:           obs-studio
-Version:        18.0.1
+Version:        18.0.2
 Release:        1%{?dist}
 Summary:        Open Broadcaster Software Studio
 
@@ -108,7 +108,7 @@ fi
 /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor >&/dev/null || :
 
 %files
-%doc README
+%doc README.rst
 %license UI/data/license/gplv2.txt
 %license COPYING
 %{_bindir}/obs
@@ -131,6 +131,9 @@ fi
 
 
 %changelog
+* Sat May 6 2017 Momcilo Medic <fedorauser@fedoraproject.org> - 18.0.2-1
+- Updated to 18.0.2
+
 * Wed Mar 8 2017 Momcilo Medic <fedorauser@fedoraproject.org> - 18.0.1-1
 - Updated to 18.0.1
 
