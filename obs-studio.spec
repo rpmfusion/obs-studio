@@ -1,5 +1,5 @@
 Name:           obs-studio
-Version:        18.0.2
+Version:        19.0.2
 Release:        1%{?dist}
 Summary:        Open Broadcaster Software Studio
 
@@ -131,8 +131,20 @@ fi
 
 
 %changelog
+* Mon May 22 2017 Momcilo Medic <fedorauser@fedoraproject.org> - 19.0.2-1
+- Updated to 19.0.2
+
+* Wed May 17 2017 Leigh Scott <leigh123linux@googlemail.com> - 18.0.2-2
+- Rebuild for ffmpeg update
+
 * Sat May 6 2017 Momcilo Medic <fedorauser@fedoraproject.org> - 18.0.2-1
 - Updated to 18.0.2
+
+* Sat Apr 29 2017 Leigh Scott <leigh123linux@googlemail.com> - 18.0.1-3
+- Rebuild for ffmpeg update
+
+* Mon Mar 20 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 18.0.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
 * Wed Mar 8 2017 Momcilo Medic <fedorauser@fedoraproject.org> - 18.0.1-1
 - Updated to 18.0.1
