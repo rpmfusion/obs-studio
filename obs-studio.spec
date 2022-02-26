@@ -5,8 +5,15 @@
 %global commit1 8ad3f64e702ac4f1799b209a511620eb1d096a01
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
 
+%ifarch %{power64}
+# LuaJIT is not available for POWER
+%bcond_with lua_scripting
+%else
+%bcond_without lua_scripting
+%endif
+
 Name:           obs-studio
-Version:        27.2.0
+Version:        27.2.1
 Release:        1%{?dist}
 Summary:        Open Broadcaster Software Studio
 
@@ -15,9 +22,9 @@ URL:            https://obsproject.com/
 Source0:        https://github.com/obsproject/obs-studio/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        https://github.com/obsproject/obs-vst/archive/%{commit1}/obs-vst-%{shortcommit1}.tar.gz
 
-%if 0%{?fedora} && 0%{?fedora} > 35
-ExcludeArch:    ppc64le
-%endif
+# Fix linux-capture build for el8
+## N.B.: Remove if rhbz#2058865 is fixed
+Patch1001:      obs-studio-27.2.1-Revert-all-changes-after-27.1.3.patch
 
 BuildRequires:  gcc
 BuildRequires:  cmake >= 3.0
@@ -47,7 +54,9 @@ BuildRequires:  libxcb-devel
 BuildRequires:  libXcomposite-devel
 BuildRequires:  libXinerama-devel
 BuildRequires:  libxkbcommon-devel
+%if %{with lua_scripting}
 BuildRequires:  luajit-devel
+%endif
 BuildRequires:  mbedtls-devel
 BuildRequires:  pciutils-devel
 BuildRequires:  pipewire-devel
@@ -102,8 +111,8 @@ tar -xf %{SOURCE1} -C plugins/obs-vst --strip-components=1
 %cmake -DOBS_VERSION_OVERRIDE=%{version} \
        -DUNIX_STRUCTURE=1 -GNinja \
        -DBUILD_BROWSER=OFF \
-%if 0%{?rhel} && 0%{?rhel} < 9
-       -DENABLE_PIPEWIRE=OFF \
+%if ! %{with lua_scripting}
+       -DDISABLE_LUA=ON \
 %endif
        -DOpenGL_GL_PREFERENCE=GLVND
 %cmake_build
@@ -144,6 +153,11 @@ appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata
 %{_includedir}/obs/
 
 %changelog
+* Sat Feb 26 2022 Neal Gompa <ngompa@fedoraproject.org> - 27.2.1-1
+- Update to 27.2.1
+- Revert all linux-capture changes after 27.1.3 for EL8 compatibility
+- Disable Lua scripting for POWER to fix ppc64le build
+
 * Mon Feb 14 2022 Neal Gompa <ngompa@fedoraproject.org> - 27.2.0-1
 - Update to 27.2.0 final
 
