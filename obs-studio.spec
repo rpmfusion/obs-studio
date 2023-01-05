@@ -2,7 +2,7 @@
 # bytecompile with Python 3
 %global __python %{__python3}
 
-%global commit1 b28cdef1fb06ece14d6be023b0f08ec28bca972e
+%global commit1 8ad3f64e702ac4f1799b209a511620eb1d096a01
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
 
 %ifarch %{power64}
