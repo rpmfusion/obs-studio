@@ -11,7 +11,7 @@
 
 Name:           obs-studio
 Version:        28.1.2
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Open Broadcaster Software Studio
 
 License:        GPLv2+
@@ -157,6 +157,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata
 %{_includedir}/obs/
 
 %changelog
+* Sat Mar 04 2023 Leigh Scott <leigh123linux@gmail.com> - 28.1.2-4
+- Rebuild for new ffmpeg
+
 * Thu Jan 12 2023 Vitaly Zaitsev <vitaly@easycoding.org> - 28.1.2-3
 - Rebuilt due to Qt 5.15.8 update.
 
