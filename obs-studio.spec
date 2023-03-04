@@ -17,6 +17,7 @@ Summary:        Open Broadcaster Software Studio
 License:        GPLv2+
 URL:            https://obsproject.com/
 Source0:        https://github.com/obsproject/obs-studio/archive/%{version}/%{name}-%{version}.tar.gz
+Patch0:         https://github.com/obsproject/obs-studio/commit/2e79d4c902abf3e6bb4ad1b5bf779c0cc22a6fd0.patch
 
 BuildRequires:  gcc
 BuildRequires:  cmake >= 3.0
